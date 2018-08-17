@@ -1,0 +1,5 @@
+<Simulation version="3.6.2">
+   <XMLScript Type="XMLScript">Simulation/diffusion_control.xml</XMLScript>
+   <PythonScript Type="PythonScript">Simulation/diffusion_control.py</PythonScript>
+   <Resource Type="Python">Simulation/diffusion_controlSteppables.py</Resource>
+</Simulation>

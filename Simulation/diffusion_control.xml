@@ -1,0 +1,59 @@
+<CompuCell3D Revision="20171208" Version="3.7.7">
+   
+   <Potts>
+      
+      <!-- Basic properties of CPM (GGH) algorithm -->
+      <Dimensions x="100" y="100" z="1"/>
+      <Steps>10000</Steps>
+      <Temperature>10.0</Temperature>
+      <NeighborOrder>1</NeighborOrder>
+   </Potts>
+   
+   <Plugin Name="CellType">
+      
+      <!-- Listing all cell types in the simulation -->
+      <CellType TypeId="0" TypeName="Medium"/>
+      <CellType TypeId="1" TypeName="A"/>
+      <CellType TypeId="2" TypeName="B"/>
+   </Plugin>
+   
+   <Plugin Name="Volume"/>
+   
+   <Plugin Name="CenterOfMass">
+      
+      <!-- Module tracking center of mass of each cell -->
+   </Plugin>
+   
+   <Plugin Name="Contact">
+      <!-- Specification of adhesion energies -->
+      <Energy Type1="Medium" Type2="Medium">10.0</Energy>
+      <Energy Type1="Medium" Type2="A">10.0</Energy>
+      <Energy Type1="Medium" Type2="B">10.0</Energy>
+      <Energy Type1="A" Type2="A">5.0</Energy>
+      <Energy Type1="A" Type2="B">5.0</Energy>
+      <Energy Type1="B" Type2="B">5.0</Energy>
+      <NeighborOrder>1</NeighborOrder>
+   </Plugin>
+   
+   <Plugin Name="Chemotaxis">
+       <ChemicalField Name="FGF" Source="DiffusionSolverFE">
+           <ChemotaxisByType Lambda="100.0" Type="A"/>
+       </ChemicalField>
+   </Plugin>
+
+   
+   <Steppable Type="DiffusionSolverFE">
+      
+      <!-- Specification of PDE solvers -->
+      <DiffusionField Name="FGF">
+         <DiffusionData>
+            <FieldName>FGF</FieldName>
+            <GlobalDiffusionConstant>0.0</GlobalDiffusionConstant>
+            <GlobalDecayConstant>0.0</GlobalDecayConstant>
+         </DiffusionData>
+         <SecretionData>
+            <Secretion Type="B">0.0</Secretion>
+         </SecretionData>
+      </DiffusionField>
+   </Steppable>
+</CompuCell3D>
